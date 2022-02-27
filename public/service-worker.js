@@ -40,8 +40,8 @@ self.addEventListener('fetch', function (e) {
         return;
       }
 
-      self.addEventListener('activate', function(evt) {
-        evt.waitUntil(
+      self.addEventListener('activate', function(e) {
+        e.waitUntil(
           caches.keys().then(keyList => {
             return Promise.all(
               keyList.map(key => {
