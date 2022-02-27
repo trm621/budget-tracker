@@ -1,6 +1,6 @@
 let db;
 
-const request = indexedDB.open('budget-tracker',1);
+const request = indexedDB.open('budget-tracker', 1);
 
 request.onupgradeneeded = function(event) {
     const db = event.target.result;
@@ -16,15 +16,15 @@ request.onsuccess = function(event) {
     }
 };
 
-request.onerror = function(event) {
-    console.log(event.target.errorCode);
-};
-
 function saveRecord(record) {
     const transaction = db.transaction(['new_budget'], 'readwrite');
     const budgetObjectStore = transaction.objectStore('new_budget');
 
     budgetObjectStore.add(record);
+}
+
+request.onerror = function(event) {
+    console.log(event.target.errorCode);
 }
 
 function uploadBudget() {
