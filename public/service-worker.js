@@ -17,6 +17,7 @@ const FILES_TO_CACHE = [
     '/icons/icon-512x512.png'
 ];
 
+
 self.addEventListener('fetch', function (e) {
     if (e.request.url.includes('/api/')) {
         e.respondWith(
