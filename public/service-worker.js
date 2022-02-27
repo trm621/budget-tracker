@@ -2,7 +2,6 @@ const CACHE_NAME = 'budget-tracker';
 const DATA_CACHE_NAME = 'budget-tracker-v1';
 
 const FILES_TO_CACHE = [
-    '/',
     '/manifest.json',
     '/css/styles.css',
     '/js/idb.js',
