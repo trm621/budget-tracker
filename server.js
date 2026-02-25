@@ -2,10 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
-
 const PORT = process.env.PORT || 3001;
 const app = express();
-
 
 app.use(logger("dev"));
 
@@ -16,11 +14,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(
-  MONGODB_URI || "mongodb://127.0.0.1:27017/budget-tracker",
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/budget-tracker",
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
+    useUnifiedTopology: true,
+  },
 );
 
 // routes
