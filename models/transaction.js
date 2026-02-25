@@ -1,6 +1,6 @@
-import { Schema as _Schema, model } from "mongoose";
+const mongoose = require("mongoose");
 
-const Schema = _Schema;
+const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema(
   {
@@ -20,6 +20,6 @@ const transactionSchema = new Schema(
   }
 );
 
-const Transaction = model("Transaction", transactionSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
-export default Transaction;
+module.exports = Transaction;
