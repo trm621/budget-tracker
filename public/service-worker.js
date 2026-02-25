@@ -38,8 +38,6 @@ self.addEventListener("activate", function (e) {
       );
     }),
   );
-  // Take control of uncontrolled clients immediately
-  self.clients && self.clients.claim && self.clients.claim();
 });
 
 self.addEventListener("fetch", function (e) {
@@ -54,16 +52,6 @@ self.addEventListener("fetch", function (e) {
             return response;
           })
           .catch(() => cache.match(e.request));
-      }),
-    );
-    return;
-  }
-
-  // Navigation requests: return cached index.html (SPA fallback)
-  if (e.request.mode === 'navigate') {
-    e.respondWith(
-      caches.match('/index.html').then((response) => {
-        return response || fetch(e.request).catch(() => caches.match('/index.html'));
       }),
     );
     return;
