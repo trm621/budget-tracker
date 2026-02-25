@@ -64,11 +64,10 @@ function sendTransaction(isAdding) {
     transaction.value *= -1;
   }
 
-  console.log(transaction)
-
   transactions.unshift(transaction);
 
   populateChart();
+  populateTable();
   populateTotal();
 
   fetch("/api/transaction", {
