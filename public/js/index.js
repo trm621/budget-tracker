@@ -1,3 +1,24 @@
+let transactions = [];
+let myChart = null;
+
+function populateTable() {
+  let tbody = document.querySelector("#tbody");
+  tbody.innerHTML = "";
+
+  transactions.forEach((trans) => {
+    let tr = document.createElement("tr");
+    let nameCell = document.createElement("td");
+    let amountCell = document.createElement("td");
+
+    nameCell.textContent = trans.name;
+    amountCell.textContent = trans.value;
+
+    tr.appendChild(nameCell);
+    tr.appendChild(amountCell);
+    tbody.appendChild(tr);
+  });
+}
+
 function populateTotal() {
   let total = transactions.reduce((total, t) => {
     return total + Number(t.value);
@@ -5,7 +26,6 @@ function populateTotal() {
 
   document.querySelector("#total").textContent = total.toFixed(2);
 }
-
 function populateChart() {
   if (!transactions.length) return;
 
@@ -88,3 +108,27 @@ function sendTransaction(isAdding) {
       amountEl.value = "";
     });
 }
+
+// saveRecord() is defined in idb.js and will be used for offline storage
+
+// Fetch transactions on page load
+fetch("/api/transaction")
+  .then((res) => res.json())
+  .then((data) => {
+    transactions = data;
+    populateTable();
+    populateChart();
+    populateTotal();
+  })
+  .catch((error) => {
+    console.error("Failed to fetch transactions:", error);
+  });
+
+// Event listeners
+document.getElementById("add-btn").addEventListener("click", () => {
+  sendTransaction(true);
+});
+
+document.getElementById("sub-btn").addEventListener("click", () => {
+  sendTransaction(false);
+});
